@@ -1,0 +1,6 @@
+build/
+.cache
+spmd-plugin/.cache
+compile_commands.json
+*/.clangd
+*.kitty-session
