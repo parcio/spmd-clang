@@ -13,10 +13,13 @@ There are currently two ways to install SPMDClang:
 
 Run the following commands with current working directory being the root of this repository.
 Currently building the Docker image takes some time because it has to compile llvm-22 from source (will be fixed in future releases).
+You can also pull the image from Docker Hub.
 
 ```bash
-# Build the docker image
+# EITHER: Build the docker image
 docker build -f Dockerfile.spmdclang -t spmd-clang:latest .
+# OR: Pull the image from Docker Hub
+docker pull mblesel/spmdclang:latest
 
 # Run the docker image
 docker run -it spmd-clang:latest
