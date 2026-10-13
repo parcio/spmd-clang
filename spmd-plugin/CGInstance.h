@@ -55,6 +55,9 @@ public:
     void dump() const;
 
     std::string output_cg() const;
+
+    // TODO WIP cfg-vis
+    std::string output_cgi_rf() const;
     
 
 private:

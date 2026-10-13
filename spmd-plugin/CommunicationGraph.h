@@ -55,6 +55,13 @@ public:
     void output_cg(const std::string &path) const;
     void output_func_cg(const std::string &path, const FuncCG &fcg) const;
 
+    // TODO WIP cfg-vis
+    void output_reactflow(std::string path);
+    void output_reactflow_cgi(const std::string &path, const std::vector<CGInstance> &cg_instances) const;
+    std::string make_output_filename(const std::string &suffix) const;
+    std::string node_to_json(const CGNode& node, std::string parentId);
+    std::string edge_to_json(const CGNode& node, const BranchingCondition& succ);
+
 private:
     void construct_graph(); 
     void construct_graph_rec(FuncCG &fcg, clang::CFGBlock &block, CGNode *pred_node, BranchingCondition *pred_cond, std::vector<clang::CFGBlock*> &known_blocks);

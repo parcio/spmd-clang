@@ -23,48 +23,48 @@
 static const bool HANDLE_TRANSLATION_UNIT_DEBUG = false;
 
 // CommunicationGraph
-static const bool CONSTRUCT_GRAPH_DEBUG = false;
-static const bool COMBINE_PARTIAL_GRAPHS_DEBUG = false;
-static const bool COMBINE_PARTIAL_GRAPHS_REC_DEBUG = false;
-static const bool INSTANTIATE_FUNC_USES_DEBUG = false;
-static const bool VALIDATE_DEBUG = false;
-static const bool PRUNE_GRAPH_DEBUG = false;
-static const bool DETECT_LOOPS_DEBUG = false;
-static const bool DETECT_COMMUNICATION_DEBUG = false;
-static const bool ANALYSIS = false;
-static const bool CREATE_CG_INSTANCE_DEBUG = false;
+static const bool CONSTRUCT_GRAPH_DEBUG = true;
+static const bool COMBINE_PARTIAL_GRAPHS_DEBUG = true;
+static const bool COMBINE_PARTIAL_GRAPHS_REC_DEBUG = true;
+static const bool INSTANTIATE_FUNC_USES_DEBUG = true;
+static const bool VALIDATE_DEBUG = true;
+static const bool PRUNE_GRAPH_DEBUG = true;
+static const bool DETECT_LOOPS_DEBUG = true;
+static const bool DETECT_COMMUNICATION_DEBUG = true;
+static const bool ANALYSIS = true;
+static const bool CREATE_CG_INSTANCE_DEBUG = true;
 
 //CGNode
-static const bool APPEND_ELEMENT_DEBUG = false;
+static const bool APPEND_ELEMENT_DEBUG = true;
 
 //CGStatementVisitor
-static const bool CGSTATEMENT_VISITOR_DEBUG = false;
+static const bool CGSTATEMENT_VISITOR_DEBUG = true;
 
 //CGinstance
-static const bool CGINSTANCE_DEBUG = false;
+static const bool CGINSTANCE_DEBUG = true;
 
 //CGNodeInstance
-static const bool CGNODEINSTANCE_APPEND_ELEMENT_DEBUG = false;
-static const bool CGNODEINSTANCE_DEBUG = false;
+static const bool CGNODEINSTANCE_APPEND_ELEMENT_DEBUG = true;
+static const bool CGNODEINSTANCE_DEBUG = true;
 
 //CGContext
-static const bool CGCONTEXT_DEBUG = false;
+static const bool CGCONTEXT_DEBUG = true;
 
 // CPNBuilder
-static const bool CPNBUILDER_GENERAL_DEBUG = false;
+static const bool CPNBUILDER_GENERAL_DEBUG = true;
 
 // CPNExpression
-static const bool CPNEXPRESSION_BUILDING_DEBUG = false;
+static const bool CPNEXPRESSION_BUILDING_DEBUG = true;
 
 // CPNStateGraph
-static const bool CPNSTATEGRAPH_COMPUTE_DEBUG = false;
-static const bool CPNSTATEGRAPH_COMPUTE_MARKING_DEBUG = false;
-static const bool CPNSTATEGRAPH_DETECT_ERRORS_DEBUG = false;
-static const bool CPNSTATEGRAPH_DISPLAY_STATISTICS_DEBUG = false;
+static const bool CPNSTATEGRAPH_COMPUTE_DEBUG = true;
+static const bool CPNSTATEGRAPH_COMPUTE_MARKING_DEBUG = true;
+static const bool CPNSTATEGRAPH_DETECT_ERRORS_DEBUG = true;
+static const bool CPNSTATEGRAPH_DISPLAY_STATISTICS_DEBUG = true;
 
 // CPNTransition
-static const bool CPNTRANSITION_FIRE_DEBUG = false;
-static const bool CPNTRANSITION_VALID_COMBINATIONS_DEBUG = false;
+static const bool CPNTRANSITION_FIRE_DEBUG = true;
+static const bool CPNTRANSITION_VALID_COMBINATIONS_DEBUG = true;
 
 
 #endif

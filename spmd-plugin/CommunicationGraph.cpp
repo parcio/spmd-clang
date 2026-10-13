@@ -59,12 +59,233 @@ CommunicationGraph::CommunicationGraph(const SPMDData &spmd_data) : _spmd_data(s
         prune_graph();
         // TODO collect_comm_operations
         output_cg("cg.gv");
+
+        // TODO WIP cfg-vis
+        output_reactflow(make_output_filename("_cfg.json"));
+
         // TODO handle loops inside loops
         detect_loops();
     }
 
     analysis(_spmd_data.process_count());
 }
+
+
+// cfg-vis function; TODO: probably move to own function
+std::string CommunicationGraph::node_to_json(const CGNode& node, std::string parentId) {
+
+    int lineNo = 0;
+    std::string ret = "\t\t{\n\t\t\t\"id\":\"" + node.name() + "\",\n\t\t\t\"type\": \"cfg-node\",\n\t\t\t\"hidden\": false,\n\t\t\t\"data\": {\n" +
+                        "\t\t\t\t\"label\": \"" + node.name() + "\",\n\t\t\t\t\"text\": [\n";
+    
+    for(auto stmt = node.elements().begin(); stmt != node.elements().end(); stmt++)
+    {
+        auto *statement = stmt->getAs<clang::CFGStmt>()->getStmt();
+        auto lineLoc = statement->getSourceRange().getBegin().printToString(_spmd_data._ctx->getSourceManager());
+        std::size_t pos1 = lineLoc.find(":")+1;
+        std::size_t pos2 = lineLoc.substr(pos1).find(":");
+        lineNo = std::stoi(lineLoc.substr(pos1, pos2));
+
+        ret.append("\t\t\t\t{\n\t\t\t\t\t\"no\": " + std::to_string(lineNo) + ",\n\t\t\t\t\t\"content\": \"" +
+                    escape_to_html(cfgelement_to_str(stmt.base())) + "\"\n\t\t\t\t},\n");
+    }
+
+    if(node.elements().size() > 0) {
+        ret.resize(ret.size()-2);         // delete last , in text-Array
+        ret.append("\n");
+    }
+
+    ret.append("\t\t\t\t]\n\t\t\t},\n");
+    if(parentId != "main") {
+        ret.append("\t\t\t\"parentId\": \"" + parentId + "\",\n\t\t\t\"extent\": \"parent\",\n");
+    }
+    return ret.append("\t\t\t\"position\": { \"x\": 0, \"y\": 0 }\n\t\t},\n");
+}
+
+// cfg-vis function; TODO: probably move to own function
+std::string CommunicationGraph::edge_to_json(const CGNode& node, const BranchingCondition& succ) {
+
+    std::string srcId = node.name();
+    std::string tarId = succ.successor->name();
+    
+    std::string ret = "\t\t{\n\t\t\t\"id\": \"edg-f-" + srcId + "-t-" + tarId + "\",\n\t\t\t\"source\": \"" + srcId + "\",\n\t\t\t\"target\": \"" + tarId + 
+            "\",\n\t\t\t\"label\": \"";
+
+    if(succ.cfg_elem) {
+        if(!succ.condition_state) {
+            ret.append("!");
+        }
+        const clang::CFGElement* cfg_el = &succ.cfg_elem.value();
+        std::string temp = cfgelement_to_str(cfg_el);
+        if(temp.find('"') != std::string::npos ) {
+            
+            std::string output;
+            for(auto c : temp) {
+                if(c == '"') {
+                    output.append("\\\"");
+                }
+                else { output.push_back(c); }
+            }
+            temp = output;
+        }
+        ret.append(temp);
+    } 
+
+    return ret.append("\",\n\t\t\t\"type\": \"labled-directed-edge\",\n\t\t\t\"markerEnd\": {\n\t\t\t\t\"type\": \"arrowclosed\"\n\t\t\t},\n\t\t\t\"animated\": false\n\t\t},\n"); 
+}
+
+// cfg-vis function; TODO: probably move to own function
+void CommunicationGraph::output_reactflow(std::string path) 
+{
+    std::error_code ec;
+    llvm::raw_fd_stream ofs(path, ec);
+    std::string edges = "";
+    std::string nodes = "";
+
+    std::unordered_map<std::string, std::string> functionNodes;
+    std::unordered_map<std::string, std::string> functionParents;
+
+    // 1. Collect information about functions and nested functions. 
+
+    // find all functions parents
+    for(std::unique_ptr<CGNode>& node : _nodes) {
+
+        // search for function entry nodes
+        if (node->attr.func_entry) {
+            std::string funcName = node->func->getNameInfo().getAsString();
+
+            // handle _copy suffix
+            std::size_t pos = node->name().find("_copy");
+            if (pos != std::string::npos)
+                funcName.append(node->name().substr(pos));
+
+            // find parent nodes of functions by the entry nodes predecessors parent (predecessor contains function call)
+            for (auto &pred : node->predecessors()) {
+                std::string parentName = pred->func->getNameInfo().getAsString();
+
+                std::size_t pos2 = pred->name().find("_copy");
+                if (pos2 != std::string::npos)
+                    parentName.append(pred->name().substr(pos2));
+                if (parentName != funcName)
+                    functionParents[funcName] = parentName;   
+            }
+        }
+    }
+
+    // create json-Output for every function node
+    for(std::unique_ptr<CGNode>& node : _nodes) {
+        std::string funcName = node->func->getNameInfo().getAsString();
+
+        if(funcName == "main") {
+            continue;
+        }
+
+        std::size_t pos = node->name().find("_copy");
+        if (pos != std::string::npos)
+            funcName.append(node->name().substr(pos));
+
+        if (!functionNodes.contains(funcName)) {
+
+            std::string json = "\t\t{\n\t\t\t\"id\": \"" + funcName + "\",\n\t\t\t\"type\": \"function-node\",\n\t\t\t\"hidden\": false,\n\t\t\t\"data\": {\n" +
+            "\t\t\t\t\"label\": \"" + funcName + "()\",\n\t\t\t\t\"text\": []\n\t\t\t},\n\t\t\t\"position\": { \"x\": 0, \"y\": 0 }";
+
+            if (functionParents.contains(funcName)) {
+                if (functionParents[funcName] != "main") {
+                    json += ", \"parentId\": \"" + functionParents[funcName] + "\", \"extent\": \"parent\"";
+                }
+            }
+            json += " },\n";
+
+            functionNodes[funcName] = json;
+        }
+    }
+
+    // append function-nodes to export
+    for (auto &[name, json] : functionNodes)
+        nodes.append(json);
+
+    // 2. Collect information about (normal) nodes and edges. 
+    
+    // collect node and edge information and save it in a flat structure (-> no hierarchy-structure in json-file)
+    for(std::unique_ptr<CGNode>& node : _nodes) {
+
+        // check if node belongs to a function
+        std::string functionNodeId = node->func->getNameInfo().getAsString();
+
+        // check if function is called multiple times
+        std::size_t pos = node->name().find("_copy");
+        if(pos != std::string::npos) {
+            functionNodeId.append(node->name().substr(pos));
+        }
+
+        nodes.append(node_to_json(*node, functionNodeId));
+
+        // save edges to all successors of each node
+        for(auto &succ : node->successors()) {
+            edges.append(std::string(edge_to_json(*node, succ)));
+        }
+    }
+
+    // check if output was successfull and delete trailing commas
+    if(nodes.size() < 1) {
+        llvm::errs() << "Could not export nodes of CFG to JSON." << "\n";
+    }
+    else {
+        nodes.resize(nodes.size()-2);
+    }
+
+    if(edges.size() < 1) {
+        llvm::errs() << "Could not export edges of CFG to JSON." << "\n";
+    }
+    else {
+        edges.resize(edges.size()-2);
+    }
+
+    ofs << "{ \"nodes\": [\n" << nodes << "\n\t],\n\"edges\": [\n" << edges << "\n\t]\n}";
+    ofs.flush();
+    ofs.close();
+}
+// cfg-vis function; TODO: probably move to own function
+void CommunicationGraph::output_reactflow_cgi(const std::string &path, const std::vector<CGInstance> &cg_instances) const
+{
+
+    std::error_code ec;
+    llvm::raw_fd_stream ofs(path, ec);
+
+    ofs << "{\n  \"processes\": [\n";
+
+    bool first = true;
+    for (const auto &cg_instance : cg_instances) {
+        if (!first) {
+            ofs << ",\n";
+        }
+        first = false;
+        // CGInstance::output_cgi_rf returns a JSON object string for the process
+        ofs << cg_instance.output_cgi_rf();
+    }
+
+    ofs << "\n\t]\n}";
+    ofs.flush();
+    ofs.close();
+}
+// cfg-vis function; TODO: probably move to own function
+std::string CommunicationGraph::make_output_filename(const std::string &suffix) const
+{
+    std::string basename = _spmd_data.source_file_basename();
+    if(basename.empty()) {
+        basename = "program";
+    }
+    else {
+        std::size_t dotPos = basename.rfind('.');
+        if(dotPos != std::string::npos) {
+            basename = basename.substr(0, dotPos);
+        } 
+    }
+
+    return basename + suffix;
+}
+
+
 
 void CommunicationGraph::output_cg(const std::string &path) const
 {
@@ -969,6 +1190,9 @@ void CommunicationGraph::analysis(const int mpi_size) const
     auto cg_instances = create_cg_instances(mpi_size);
     if(DEBUG) {
         output_cgi("cgi.gv", cg_instances);
+
+        // TODO WIP cfg-vis
+        output_reactflow_cgi(make_output_filename("_cgi.json"), cg_instances);
     }
 
     // Collect MPI Operations for each CGInstance

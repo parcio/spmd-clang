@@ -121,8 +121,17 @@ class SPMDData
 
     const std::vector<FuncCFG>& cfg_parts() const;
 
+    // TODO WIP cfg-vis
+    void set_source_file(std::string path);
+    const std::string &source_file() const;
+    std::string source_file_basename() const;
+
     // TODO MAKE PRIVATE AGAIN
     clang::ASTContext *_ctx;
+    
+    // TODO WIP cfg-vis
+    std::string _source_file;
+
 
     const int process_count() const { return _process_count; }
     const int max_loop_iterations() const { return _max_loop_iterations; }

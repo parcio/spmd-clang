@@ -212,6 +212,32 @@ const std::vector<FuncCFG>& SPMDData::cfg_parts() const
     return _cfg_parts;
 }
 
+
+    
+// TODO WIP cfg-vis
+void SPMDData::set_source_file(std::string path)
+{
+    _source_file = std::move(path);
+}
+// TODO WIP cfg-vis
+const std::string &SPMDData::source_file() const
+{
+    return _source_file;
+}
+// TODO WIP cfg-vis
+std::string SPMDData::source_file_basename() const
+{
+    if (_source_file.empty())
+        return _source_file;
+
+    auto pos = _source_file.find_last_of("/");
+    auto pos1 =  _source_file.find_last_of(".");
+    if (pos == std::string::npos || pos1 == std::string::npos )
+        return _source_file;
+    return _source_file.substr(pos + 1, (pos1-pos-1));
+}
+
+
 SPMDVar* SPMDData::find_rank_var(const VarDecl *var_decl)
 {
     for(auto &var : _rank_vars) {

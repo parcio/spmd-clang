@@ -328,6 +328,8 @@ class SPMDAction : public PluginASTAction
     std::unique_ptr<ASTConsumer> CreateASTConsumer(CompilerInstance &CI,
                                                    llvm::StringRef InFile) override
     {
+        // TODO WIP cfg-vis
+        SPMD_DATA.set_source_file(InFile.str());
         return std::make_unique<SPMDConsumer>(&CI.getASTContext());
     }
 

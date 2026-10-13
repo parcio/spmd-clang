@@ -793,6 +793,56 @@ std::string CGInstance::output_cg() const
     return ofs.str();
 }
 
+
+// TODO WIP cfg-vis
+std::string CGInstance::output_cgi_rf() const {
+    std::string output = "\t\t{\n\t\t\"mpi_rank\": " + std::to_string(this->mpi_rank) + ",\n\t\t\"active_nodes\": [\n";
+    std::string edges = "\n\t\t\"active_edges\": [";
+
+    // nodes
+    for (const auto &node : _nodes) {
+        std::string node_id = escape_to_html(node->name()).substr(3);
+        output.append("\t\t\t{\n\t\t\t\"id\": \"" + node_id );
+        output.append( + "\",\n");
+        output.append("\t\t\t\"evaluated\": [");
+        for (const auto &stmt : node->elements()) {
+            std::string sliced_stmt = escape_to_html(node->get_evaluated_cfg_as_string(stmt));
+            sliced_stmt = sliced_stmt.substr(6, sliced_stmt.size() - 13);
+            output.append("\n\t\t\t\t\"" + sliced_stmt);
+            output.append("\",");
+        }
+        // remove last comma
+        if (!node->elements().empty()) {
+            output.pop_back(); 
+        }
+        output.append("\n\t\t\t\t]\n\t\t\t},\n");
+
+        // edges for node in loop
+        for (const auto &succ : node->successors()) {
+
+            std::string tar = succ.successor->name().substr(3);
+            std::string id = std::string("edg-f-") + node_id + "-t-" + tar;
+            edges.append("\n\t\t\t{ \"id\": \"" + id + "\" },");
+        }
+    }
+    // remove last linebreak and comma for nodes
+    if (!_nodes.empty()) {
+        output.pop_back();
+        output.pop_back();
+    }
+    output.append("\n\t\t],");
+
+    // remove last comma for edges
+    if (!edges.empty()) {
+        edges.pop_back();
+    }
+    edges.append("\n\t\t\t]");
+    output.append(edges);
+    output.append("\n\t\t}");
+    return output;
+}
+
+
 void CGInstance::dump_queue(std::queue<ConstructGraphData> &queue) const
 {
     llvm::errs() << "Queue: [";
