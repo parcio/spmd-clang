@@ -1236,6 +1236,9 @@ void CommunicationGraph::analysis(const int mpi_size) const
     state_graph.display_statistics(); 
     if(DEBUG) {
         state_graph.output_sg("sg.gv");
+
+        // TODO WIP cpn-vis
+        state_graph.output_reactflow_sg("sg_reactflow.json");
     }
 
     // TODO WIP analyze terminal states for errors in communication patterns

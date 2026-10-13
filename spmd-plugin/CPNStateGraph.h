@@ -48,6 +48,12 @@ public:
     void output_sg(const std::string &path) const;
 
 
+    // TODO WIP cpn-vis
+    void output_reactflow(const std::string &path) const;
+    void output_reactflow_sg(const std::string &path) const;
+
+
+
 private:
     std::set<std::pair<CPNMarking, std::string>> compute_marking(const CPNMarking &marking);
 
@@ -61,6 +67,11 @@ private:
     std::set<std::string> _dead_transitions;
     std::set<std::string> _viable_transitions;
 
+
+    // TODO WIP cpn-vis
+    std::string escape_json_string(const std::string& str) const;
+    const CPNMarking& find_state_by_id(const std::map<CPNMarking, int>& state_ids, int id) const;
+    std::vector<std::string> split_string(const std::string& str, char delimiter) const;
 };
 
 #endif
