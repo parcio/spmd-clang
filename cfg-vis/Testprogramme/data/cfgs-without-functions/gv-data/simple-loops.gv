@@ -1,0 +1,35 @@
+digraph G {
+    "main14"[label=< <B>main14</B><BR/>int size;<BR/>int rank;<BR/>MPI_Init(&amp;argc, &amp;argv)<BR/>MPI_Comm_size(((MPI_Comm)((void *)&amp;(ompi_mpi_comm_world))), &amp;size)<BR/>MPI_Comm_rank(((MPI_Comm)((void *)&amp;(ompi_mpi_comm_world))), &amp;rank)<BR/>printf(\"%d: initialized %d processes\\n\", rank, size)<BR/>MPI_Status status;<BR/>int a = 1;<BR/>int b = 2;<BR/>int result_a;<BR/>int result_b;<BR/>>, shape=box]
+    "main14"->"main13"[label="rank == 0"]
+    "main14"->"main8"[label="!(rank == 0)"]
+    "main13"[label=< <B>main13</B><BR/>int res = 1;<BR/>int i = 0;<BR/>>, shape=box]
+    "main13"->"main12"
+    "main12"[label=< <B>main12</B><BR/>>, shape=box]
+    "main12"->"main11"[label="i &lt; 10"]
+    "main12"->"main9"[label="!(i &lt; 10)"]
+    "main11"[label=< <B>main11</B><BR/>res = res + a<BR/>>, shape=box]
+    "main11"->"main10"
+    "main10"[label=< <B>main10</B><BR/>i++<BR/>>, shape=box]
+    "main10"->"main12"
+    "main9"[label=< <B>main9</B><BR/>result_a = res<BR/>MPI_Recv((void *)&amp;result_b, 1, ((MPI_Datatype)((void *)&amp;(ompi_mpi_int))), 1, 1, ((MPI_Comm)((void *)&amp;(ompi_mpi_comm_world))), &amp;status)<BR/>printf(\"Calculated result_a=%d and got result_b=%.\")<BR/>>, shape=box]
+    "main9"->"main1"
+    "main1"[label=< <B>main1</B><BR/>MPI_Finalize()<BR/>0<BR/>return 0;<BR/>>, shape=box]
+    "main1"->"main0"
+    "main0"[label=< <B>main0</B><BR/>>, shape=box]
+    "main8"[label=< <B>main8</B><BR/>>, shape=box]
+    "main8"->"main7"[label="rank == 1"]
+    "main8"->"main2"[label="!(rank == 1)"]
+    "main7"[label=< <B>main7</B><BR/>int res = 1;<BR/>int i = 0;<BR/>>, shape=box]
+    "main7"->"main6"
+    "main6"[label=< <B>main6</B><BR/>>, shape=box]
+    "main6"->"main5"[label="i &lt; 10"]
+    "main6"->"main3"[label="!(i &lt; 10)"]
+    "main5"[label=< <B>main5</B><BR/>res = res + b<BR/>>, shape=box]
+    "main5"->"main4"
+    "main4"[label=< <B>main4</B><BR/>i++<BR/>>, shape=box]
+    "main4"->"main6"
+    "main3"[label=< <B>main3</B><BR/>result_b = res<BR/>MPI_Send((void *)&amp;result_b, 1, ((MPI_Datatype)((void *)&amp;(ompi_mpi_int))), 0, 1, ((MPI_Comm)((void *)&amp;(ompi_mpi_comm_world))))<BR/>>, shape=box]
+    "main3"->"main1"
+    "main2"[label=< <B>main2</B><BR/>printf(\"Nothing to do ... \")<BR/>>, shape=box]
+    "main2"->"main1"
+}

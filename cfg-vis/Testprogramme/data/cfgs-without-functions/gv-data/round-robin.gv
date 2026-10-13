@@ -1,0 +1,19 @@
+digraph G {
+    "main7"[label=< <B>main7</B><BR/>MPI_Init(&amp;argc, &amp;argv)<BR/> __attribute__((spmd(\"rank\")))int rank __attribute__((spmd(\"rank\")));<BR/> __attribute__((spmd(\"size\")))int size __attribute__((spmd(\"size\")));<BR/>MPI_Comm_size(((MPI_Comm)((void *)&amp;(ompi_mpi_comm_world))), &amp;size)<BR/>MPI_Comm_rank(((MPI_Comm)((void *)&amp;(ompi_mpi_comm_world))), &amp;rank)<BR/>printf(\"%d: initialized %d processes\\n\", rank, size)<BR/>long rand_cur;<BR/>long rand_prev;<BR/>int rank_suc = (rank + 1) % size;<BR/>>, shape=box]
+    "main7"->"main5"[label="rank == 0"]
+    "main7"->"main6"[label="!(rank == 0)"]
+    "main5"[label=< <B>main5</B><BR/>size - 1<BR/>>, shape=box]
+    "main5"->"main4"
+    "main4"[label=< <B>main4</B><BR/>rank == 0 ? size - 1 : rank - 1<BR/>int rank_prev = rank == 0 ? size - 1 : rank - 1;<BR/>MPI_Status status;<BR/>time(((void *)0))<BR/>srandom(time(((void *)0)) + rank)<BR/>random()<BR/>rand_cur = random() / (2147483647 / 100)<BR/>printf(\"%d: Processes random number is %ld\\n\", rank, rand_cur)<BR/>>, shape=box]
+    "main4"->"main3"[label="rank % 2"]
+    "main4"->"main2"[label="!(rank % 2)"]
+    "main3"[label=< <B>main3</B><BR/>printf(\"%d: Sending %ld to %d\\n\", rank, rand_cur, rank_suc)<BR/>MPI_Send((void *)&amp;rand_cur, 1, ((MPI_Datatype)((void *)&amp;(ompi_mpi_long))), rank_suc, 1, ((MPI_Comm)((void *)&amp;(ompi_mpi_comm_world))))<BR/>printf(\"%d: receiving from %d\\n\", rank, rank_prev)<BR/>MPI_Recv((void *)&amp;rand_prev, 1, ((MPI_Datatype)((void *)&amp;(ompi_mpi_long))), rank_prev, 1, ((MPI_Comm)((void *)&amp;(ompi_mpi_comm_world))), &amp;status)<BR/>>, shape=box]
+    "main3"->"main1"
+    "main1"[label=< <B>main1</B><BR/>printf(\"%d: I had %ld, and got %ld from %d\\n\", rank, rand_cur, rand_prev, rank_prev)<BR/>printf(\"%d: terminates \\n\", rank)<BR/>MPI_Finalize()<BR/>0<BR/>return 0;<BR/>>, shape=box]
+    "main1"->"main0"
+    "main0"[label=< <B>main0</B><BR/>>, shape=box]
+    "main2"[label=< <B>main2</B><BR/>printf(\"%d: receiving from %d\\n\", rank, rank_prev)<BR/>MPI_Recv((void *)&amp;rand_prev, 1, ((MPI_Datatype)((void *)&amp;(ompi_mpi_long))), rank_prev, 1, ((MPI_Comm)((void *)&amp;(ompi_mpi_comm_world))), &amp;status)<BR/>printf(\"%d: Sending %ld to %d\\n\", rank, rand_cur, rank_suc)<BR/>MPI_Send((void *)&amp;rand_cur, 1, ((MPI_Datatype)((void *)&amp;(ompi_mpi_long))), rank_suc, 1, ((MPI_Comm)((void *)&amp;(ompi_mpi_comm_world))))<BR/>>, shape=box]
+    "main2"->"main1"
+    "main6"[label=< <B>main6</B><BR/>rank - 1<BR/>>, shape=box]
+    "main6"->"main4"
+}

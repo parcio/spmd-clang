@@ -1,0 +1,145 @@
+
+.cfg-node {
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  background: #22272e;
+  box-shadow: 3px 3px 2px 1px rgba(130, 130, 130, 0.137);
+}
+
+.cfg-node label {
+  margin-left: 5px;
+  text-align: left;
+  display: block;
+  color: #bdb7b7;
+  font-size: 11px;
+  font-family: 'Courier New', monospace;
+}
+
+.cfg-node .react-flow__handle {
+    opacity: 0;
+}
+
+button.extend-code {
+  padding:1px;
+  color:rgb(196, 196, 196);
+  background: none;
+  border: none;
+  font-size: 7px;
+}
+
+button.extend-function {
+  background: none;
+  border:none;
+  font-size: 7px;
+}
+
+button.extend-node-from-function {
+  background: #6a839c;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 1px;
+  padding: 2px 4px;
+  font-size: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: none;
+}
+
+.code-Wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.function-node {
+  font-family: 'Courier New', monospace;
+  color: #22272e;
+  border: none;
+  border-radius: 3px;
+  background: #6a839c;
+  opacity: 0.6;
+}
+
+.function-node-collapsed {
+  font-family: 'Courier New', monospace;
+  color: #22272e;
+  border: 1px solid #bbb !important;
+  border-radius: 6px !important;
+  background: #f7f7f7 !important;
+  padding: 0 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+}
+
+.function-node-collapsed .react-flow__handle {
+  display: none !important;
+}
+
+tbody.scroll {
+  white-space: normal;
+  display: block;
+  max-height: 100px;
+  max-width: fit-content;
+  overflow-y: auto;
+  font-size: 7pt;
+  background: #22272e;
+}
+
+tbody.normal {
+  white-space: normal;
+  display: block;
+  max-height: fit-content;
+  max-width: fit-content;
+  font-size: 7pt;
+  background: #22272e;
+}
+
+tr,td {
+  line-height: 0px;
+  color: #bdb7b7;
+  background-color: #22272e;
+}
+
+td:nth-child(1) {
+  width: 2.0em;
+  min-width: 2.0em;
+}
+
+td:nth-child(3) {
+  width: 3.0em;
+  min-width: 3.0em;
+}
+
+pre {
+  display: flex;
+  font-family: monospace;
+  white-space: normal;
+  margin: 0em 0;
+  max-height: 14px;
+  max-width: fit-content;
+}
+
+code.language-cpp { 
+  white-space: normal;
+  background-color: #22272e
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 0px;
+  background-color: #22272e;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #bdb7b7;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+

@@ -1,0 +1,128 @@
+digraph G {
+    "main11"[label=< <B>main11</B><BR/>int n = 2000;<BR/>>, shape=box]
+    "main11"->"main10"[label="argc &gt;= 2"]
+    "main11"->"main9"[label="!(argc &gt;= 2)"]
+    "main10"[label=< <B>main10</B><BR/>atoi(argv[1])<BR/>n = atoi(argv[1])<BR/>>, shape=box]
+    "main10"->"main9"
+    "main9"[label=< <B>main9</B><BR/>double *u;<BR/>double *v;<BR/>_mm_malloc((n + 3) * sizeof(double), sizeof(__m128d))<BR/>u = _mm_malloc((n + 3) * sizeof(double), sizeof(__m128d))<BR/>_mm_malloc((n + 3) * sizeof(double), sizeof(__m128d))<BR/>v = _mm_malloc((n + 3) * sizeof(double), sizeof(__m128d))<BR/>_mm_malloc((n + 3) * sizeof(double), sizeof(__m128d))<BR/>tmp = _mm_malloc((n + 3) * sizeof(double), sizeof(__m128d))<BR/>int i;<BR/>i = 0<BR/>>, shape=box]
+    "main9"->"main8"
+    "main8"[label=< <B>main8</B><BR/>>, shape=box]
+    "main8"->"main7"[label="i &lt; n"]
+    "main8"->"main5"[label="!(i &lt; n)"]
+    "main7"[label=< <B>main7</B><BR/>u[i] = 1<BR/>>, shape=box]
+    "main7"->"main6"
+    "main6"[label=< <B>main6</B><BR/>i++<BR/>>, shape=box]
+    "main6"->"main8"
+    "main5"[label=< <B>main5</B><BR/>u[n] = u[n + 1] = u[n + 2] = 0.<BR/>i = 0<BR/>>, shape=box]
+    "main5"->"main4"
+    "main4"[label=< <B>main4</B><BR/>>, shape=box]
+    "main4"->"mult_Av9"[label="i &lt; 10"]
+    "main4"->"dot5"[label="!(i &lt; 10)"]
+    "main2"[label=< <B>main2</B><BR/>i++<BR/>>, shape=box]
+    "main2"->"main4"
+    "main1_e_e"[label=< <B>main1_e_e</B><BR/>sqrt(dot(u, v, n) / dot(v, v, n))<BR/>printf(\"%.9f\\n\", sqrt(dot(u, v, n) / dot(v, v, n)))<BR/>_mm_free(u)<BR/>_mm_free(v)<BR/>_mm_free(tmp)<BR/>0<BR/>return 0;<BR/>>, shape=box]
+    "main1_e_e"->"main0"
+    "main0"[label=< <B>main0</B><BR/>>, shape=box]
+    "dot5"[label=< <B>dot5</B><BR/>int i;<BR/>double sum = 0;<BR/>i = 0<BR/>>, shape=box]
+    "dot5"->"dot4"
+    "dot4"[label=< <B>dot4</B><BR/>>, shape=box]
+    "dot4"->"dot3"[label="i &lt; n"]
+    "dot4"->"dot1"[label="!(i &lt; n)"]
+    "dot3"[label=< <B>dot3</B><BR/>sum += *v++ * *u++<BR/>>, shape=box]
+    "dot3"->"dot2"
+    "dot2"[label=< <B>dot2</B><BR/>i++<BR/>>, shape=box]
+    "dot2"->"dot4"
+    "dot1"[label=< <B>dot1</B><BR/>sum (ImplicitCastExpr, LValueToRValue, double)<BR/>return sum;<BR/>>, shape=box]
+    "dot1"->"dot5_copy1"
+    "mult_Atv9"[label=< <B>mult_Atv9</B><BR/>_mm_set1_epi32(1)<BR/>__m128i ONE = _mm_set1_epi32(1);<BR/>_mm_set1_epi32(4)<BR/>__m128i FOUR = _mm_set1_epi32(4);<BR/>int i;<BR/>i = 0<BR/>>, shape=box]
+    "mult_Atv9"->"mult_Atv8"
+    "mult_Atv8"[label=< <B>mult_Atv8</B><BR/>>, shape=box]
+    "mult_Atv8"->"mult_Atv7"[label="i &lt; n"]
+    "mult_Atv8"->"mult_Atv1"[label="!(i &lt; n)"]
+    "mult_Atv7"[label=< <B>mult_Atv7</B><BR/>double *pv = v;<BR/>_mm_setzero_pd()<BR/>__m128d mysum = _mm_setzero_pd();<BR/>_mm_setr_epi32(i, i + 1, i + 2, i + 3)<BR/>__m128i x = _mm_setr_epi32(i, i + 1, i + 2, i + 3);<BR/>_mm_setr_epi32(1, 2, 3, 4)<BR/>__m128i aj = _mm_setr_epi32(1, 2, 3, 4);<BR/>int j = 0;<BR/>>, shape=box]
+    "mult_Atv7"->"mult_Atv6"
+    "mult_Atv6"[label=< <B>mult_Atv6</B><BR/>>, shape=box]
+    "mult_Atv6"->"mult_Atv5"[label="j &lt; n"]
+    "mult_Atv6"->"mult_Atv3"[label="!(j &lt; n)"]
+    "mult_Atv5"[label=< <B>mult_Atv5</B><BR/>_mm_add_epi32(x, ONE)<BR/>__m128i y = _mm_add_epi32(x, ONE);<BR/>_mm_mullo_epi32(x, y)<BR/>__m128i a = _mm_mullo_epi32(x, y);<BR/>_mm_add_epi32(x, FOUR)<BR/>x = _mm_add_epi32(x, FOUR)<BR/>_mm_srli_epi32(a, 1)<BR/>a = _mm_srli_epi32(a, 1)<BR/>_mm_add_epi32(a, aj)<BR/>a = _mm_add_epi32(a, aj)<BR/>_mm_add_epi32(aj, FOUR)<BR/>aj = _mm_add_epi32(aj, FOUR)<BR/>_mm_cvtepi32_pd(a)<BR/>__m128d mul = _mm_cvtepi32_pd(a);<BR/>_mm_load_pd(pv)<BR/>__m128d src = _mm_load_pd(pv);<BR/>pv += 2<BR/>_mm_div_pd(src, mul)<BR/>__m128d res = _mm_div_pd(src, mul);<BR/>_mm_add_pd(mysum, res)<BR/>mysum = _mm_add_pd(mysum, res)<BR/>__builtin_ia32_pshufd((__v4si)(__m128i)(a), (int)((((1) &lt;&lt; 6) | ((0) &lt;&lt; 4) | ((3) &lt;&lt; 2) | (2))))<BR/>a = ((__m128i)__builtin_ia32_pshufd((__v4si)(__m128i)(a), (int)((((1) &lt;&lt; 6) | ((0) &lt;&lt; 4) | ((3) &lt;&lt; 2) | (2)))))<BR/>_mm_cvtepi32_pd(a)<BR/>mul = _mm_cvtepi32_pd(a)<BR/>_mm_load_pd(pv)<BR/>src = _mm_load_pd(pv)<BR/>pv += 2<BR/>_mm_div_pd(src, mul)<BR/>res = _mm_div_pd(src, mul)<BR/>_mm_add_pd(mysum, res)<BR/>mysum = _mm_add_pd(mysum, res)<BR/>>, shape=box]
+    "mult_Atv5"->"mult_Atv4"
+    "mult_Atv4"[label=< <B>mult_Atv4</B><BR/>j += 4<BR/>>, shape=box]
+    "mult_Atv4"->"mult_Atv6"
+    "mult_Atv3"[label=< <B>mult_Atv3</B><BR/>out[i] = ((double *)&amp;mysum)[0] + ((double *)&amp;mysum)[1]<BR/>>, shape=box]
+    "mult_Atv3"->"mult_Atv2"
+    "mult_Atv2"[label=< <B>mult_Atv2</B><BR/>i++<BR/>>, shape=box]
+    "mult_Atv2"->"mult_Atv8"
+    "mult_Atv1"[label=< <B>mult_Atv1</B><BR/>out[n] = out[n + 1] = out[n + 2] = 0.<BR/>>, shape=box]
+    "mult_Atv1"->"mult_Av9_copy1"
+    "mult_Av9"[label=< <B>mult_Av9</B><BR/>_mm_set1_epi32(1)<BR/>__m128i ONE = _mm_set1_epi32(1);<BR/>_mm_set1_epi32(4)<BR/>__m128i FOUR = _mm_set1_epi32(4);<BR/>unsigned int i;<BR/>unsigned int j;<BR/>i = 1<BR/>>, shape=box]
+    "mult_Av9"->"mult_Av8"
+    "mult_Av8"[label=< <B>mult_Av8</B><BR/>>, shape=box]
+    "mult_Av8"->"mult_Av7"[label="i &lt;= n"]
+    "mult_Av8"->"mult_Av1"[label="!(i &lt;= n)"]
+    "mult_Av7"[label=< <B>mult_Av7</B><BR/>j = i - 1<BR/>int k = n + j;<BR/>_mm_set1_epi32(i)<BR/>__m128i m = _mm_set1_epi32(i);<BR/>_mm_setzero_pd()<BR/>__m128d mysum = _mm_setzero_pd();<BR/>_mm_setr_epi32(j, j + 1, j + 2, j + 3)<BR/>__m128i x = _mm_setr_epi32(j, j + 1, j + 2, j + 3);<BR/>double *pv = v;<BR/>>, shape=box]
+    "mult_Av7"->"mult_Av6"
+    "mult_Av6"[label=< <B>mult_Av6</B><BR/>>, shape=box]
+    "mult_Av6"->"mult_Av5"[label="j &lt; k"]
+    "mult_Av6"->"mult_Av3"[label="!(j &lt; k)"]
+    "mult_Av5"[label=< <B>mult_Av5</B><BR/>_mm_add_epi32(x, ONE)<BR/>__m128i y = _mm_add_epi32(x, ONE);<BR/>_mm_mullo_epi32(x, y)<BR/>__m128i a = _mm_mullo_epi32(x, y);<BR/>_mm_add_epi32(x, FOUR)<BR/>x = _mm_add_epi32(x, FOUR)<BR/>_mm_srli_epi32(a, 1)<BR/>a = _mm_srli_epi32(a, 1)<BR/>_mm_add_epi32(a, m)<BR/>a = _mm_add_epi32(a, m)<BR/>_mm_cvtepi32_pd(a)<BR/>__m128d mul = _mm_cvtepi32_pd(a);<BR/>_mm_load_pd(pv)<BR/>__m128d src = _mm_load_pd(pv);<BR/>pv += 2<BR/>_mm_div_pd(src, mul)<BR/>__m128d res = _mm_div_pd(src, mul);<BR/>_mm_add_pd(mysum, res)<BR/>mysum = _mm_add_pd(mysum, res)<BR/>__builtin_ia32_pshufd((__v4si)(__m128i)(a), (int)((((1) &lt;&lt; 6) | ((0) &lt;&lt; 4) | ((3) &lt;&lt; 2) | (2))))<BR/>a = ((__m128i)__builtin_ia32_pshufd((__v4si)(__m128i)(a), (int)((((1) &lt;&lt; 6) | ((0) &lt;&lt; 4) | ((3) &lt;&lt; 2) | (2)))))<BR/>_mm_cvtepi32_pd(a)<BR/>mul = _mm_cvtepi32_pd(a)<BR/>_mm_load_pd(pv)<BR/>src = _mm_load_pd(pv)<BR/>_mm_div_pd(src, mul)<BR/>res = _mm_div_pd(src, mul)<BR/>_mm_add_pd(mysum, res)<BR/>mysum = _mm_add_pd(mysum, res)<BR/>>, shape=box]
+    "mult_Av5"->"mult_Av4"
+    "mult_Av4"[label=< <B>mult_Av4</B><BR/>j += 4<BR/>pv += 2<BR/>... , <BR/>>, shape=box]
+    "mult_Av4"->"mult_Av6"
+    "mult_Av3"[label=< <B>mult_Av3</B><BR/>out[i - 1] = ((double *)&amp;mysum)[0] + ((double *)&amp;mysum)[1]<BR/>>, shape=box]
+    "mult_Av3"->"mult_Av2"
+    "mult_Av2"[label=< <B>mult_Av2</B><BR/>i++<BR/>>, shape=box]
+    "mult_Av2"->"mult_Av8"
+    "mult_Av1"[label=< <B>mult_Av1</B><BR/>out[n] = out[n + 1] = out[n + 2] = 0.<BR/>>, shape=box]
+    "mult_Av1"->"mult_Atv9"
+    "mult_Av9_copy1"[label=< <B>mult_Av9_copy1</B><BR/>_mm_set1_epi32(1)<BR/>__m128i ONE = _mm_set1_epi32(1);<BR/>_mm_set1_epi32(4)<BR/>__m128i FOUR = _mm_set1_epi32(4);<BR/>unsigned int i;<BR/>unsigned int j;<BR/>i = 1<BR/>>, shape=box]
+    "mult_Av9_copy1"->"mult_Av8_copy1"
+    "mult_Av8_copy1"[label=< <B>mult_Av8_copy1</B><BR/>>, shape=box]
+    "mult_Av8_copy1"->"mult_Av7_copy1"[label="i &lt;= n"]
+    "mult_Av8_copy1"->"mult_Av1_copy1"[label="!(i &lt;= n)"]
+    "mult_Av7_copy1"[label=< <B>mult_Av7_copy1</B><BR/>j = i - 1<BR/>int k = n + j;<BR/>_mm_set1_epi32(i)<BR/>__m128i m = _mm_set1_epi32(i);<BR/>_mm_setzero_pd()<BR/>__m128d mysum = _mm_setzero_pd();<BR/>_mm_setr_epi32(j, j + 1, j + 2, j + 3)<BR/>__m128i x = _mm_setr_epi32(j, j + 1, j + 2, j + 3);<BR/>double *pv = v;<BR/>>, shape=box]
+    "mult_Av7_copy1"->"mult_Av6_copy1"
+    "mult_Av6_copy1"[label=< <B>mult_Av6_copy1</B><BR/>>, shape=box]
+    "mult_Av6_copy1"->"mult_Av5_copy1"[label="j &lt; k"]
+    "mult_Av6_copy1"->"mult_Av3_copy1"[label="!(j &lt; k)"]
+    "mult_Av5_copy1"[label=< <B>mult_Av5_copy1</B><BR/>_mm_add_epi32(x, ONE)<BR/>__m128i y = _mm_add_epi32(x, ONE);<BR/>_mm_mullo_epi32(x, y)<BR/>__m128i a = _mm_mullo_epi32(x, y);<BR/>_mm_add_epi32(x, FOUR)<BR/>x = _mm_add_epi32(x, FOUR)<BR/>_mm_srli_epi32(a, 1)<BR/>a = _mm_srli_epi32(a, 1)<BR/>_mm_add_epi32(a, m)<BR/>a = _mm_add_epi32(a, m)<BR/>_mm_cvtepi32_pd(a)<BR/>__m128d mul = _mm_cvtepi32_pd(a);<BR/>_mm_load_pd(pv)<BR/>__m128d src = _mm_load_pd(pv);<BR/>pv += 2<BR/>_mm_div_pd(src, mul)<BR/>__m128d res = _mm_div_pd(src, mul);<BR/>_mm_add_pd(mysum, res)<BR/>mysum = _mm_add_pd(mysum, res)<BR/>__builtin_ia32_pshufd((__v4si)(__m128i)(a), (int)((((1) &lt;&lt; 6) | ((0) &lt;&lt; 4) | ((3) &lt;&lt; 2) | (2))))<BR/>a = ((__m128i)__builtin_ia32_pshufd((__v4si)(__m128i)(a), (int)((((1) &lt;&lt; 6) | ((0) &lt;&lt; 4) | ((3) &lt;&lt; 2) | (2)))))<BR/>_mm_cvtepi32_pd(a)<BR/>mul = _mm_cvtepi32_pd(a)<BR/>_mm_load_pd(pv)<BR/>src = _mm_load_pd(pv)<BR/>_mm_div_pd(src, mul)<BR/>res = _mm_div_pd(src, mul)<BR/>_mm_add_pd(mysum, res)<BR/>mysum = _mm_add_pd(mysum, res)<BR/>>, shape=box]
+    "mult_Av5_copy1"->"mult_Av4_copy1"
+    "mult_Av4_copy1"[label=< <B>mult_Av4_copy1</B><BR/>j += 4<BR/>pv += 2<BR/>... , <BR/>>, shape=box]
+    "mult_Av4_copy1"->"mult_Av6_copy1"
+    "mult_Av3_copy1"[label=< <B>mult_Av3_copy1</B><BR/>out[i - 1] = ((double *)&amp;mysum)[0] + ((double *)&amp;mysum)[1]<BR/>>, shape=box]
+    "mult_Av3_copy1"->"mult_Av2_copy1"
+    "mult_Av2_copy1"[label=< <B>mult_Av2_copy1</B><BR/>i++<BR/>>, shape=box]
+    "mult_Av2_copy1"->"mult_Av8_copy1"
+    "mult_Av1_copy1"[label=< <B>mult_Av1_copy1</B><BR/>out[n] = out[n + 1] = out[n + 2] = 0.<BR/>>, shape=box]
+    "mult_Av1_copy1"->"mult_Atv9_copy1"
+    "mult_Atv9_copy1"[label=< <B>mult_Atv9_copy1</B><BR/>_mm_set1_epi32(1)<BR/>__m128i ONE = _mm_set1_epi32(1);<BR/>_mm_set1_epi32(4)<BR/>__m128i FOUR = _mm_set1_epi32(4);<BR/>int i;<BR/>i = 0<BR/>>, shape=box]
+    "mult_Atv9_copy1"->"mult_Atv8_copy1"
+    "mult_Atv8_copy1"[label=< <B>mult_Atv8_copy1</B><BR/>>, shape=box]
+    "mult_Atv8_copy1"->"mult_Atv7_copy1"[label="i &lt; n"]
+    "mult_Atv8_copy1"->"mult_Atv1_copy1"[label="!(i &lt; n)"]
+    "mult_Atv7_copy1"[label=< <B>mult_Atv7_copy1</B><BR/>double *pv = v;<BR/>_mm_setzero_pd()<BR/>__m128d mysum = _mm_setzero_pd();<BR/>_mm_setr_epi32(i, i + 1, i + 2, i + 3)<BR/>__m128i x = _mm_setr_epi32(i, i + 1, i + 2, i + 3);<BR/>_mm_setr_epi32(1, 2, 3, 4)<BR/>__m128i aj = _mm_setr_epi32(1, 2, 3, 4);<BR/>int j = 0;<BR/>>, shape=box]
+    "mult_Atv7_copy1"->"mult_Atv6_copy1"
+    "mult_Atv6_copy1"[label=< <B>mult_Atv6_copy1</B><BR/>>, shape=box]
+    "mult_Atv6_copy1"->"mult_Atv5_copy1"[label="j &lt; n"]
+    "mult_Atv6_copy1"->"mult_Atv3_copy1"[label="!(j &lt; n)"]
+    "mult_Atv5_copy1"[label=< <B>mult_Atv5_copy1</B><BR/>_mm_add_epi32(x, ONE)<BR/>__m128i y = _mm_add_epi32(x, ONE);<BR/>_mm_mullo_epi32(x, y)<BR/>__m128i a = _mm_mullo_epi32(x, y);<BR/>_mm_add_epi32(x, FOUR)<BR/>x = _mm_add_epi32(x, FOUR)<BR/>_mm_srli_epi32(a, 1)<BR/>a = _mm_srli_epi32(a, 1)<BR/>_mm_add_epi32(a, aj)<BR/>a = _mm_add_epi32(a, aj)<BR/>_mm_add_epi32(aj, FOUR)<BR/>aj = _mm_add_epi32(aj, FOUR)<BR/>_mm_cvtepi32_pd(a)<BR/>__m128d mul = _mm_cvtepi32_pd(a);<BR/>_mm_load_pd(pv)<BR/>__m128d src = _mm_load_pd(pv);<BR/>pv += 2<BR/>_mm_div_pd(src, mul)<BR/>__m128d res = _mm_div_pd(src, mul);<BR/>_mm_add_pd(mysum, res)<BR/>mysum = _mm_add_pd(mysum, res)<BR/>__builtin_ia32_pshufd((__v4si)(__m128i)(a), (int)((((1) &lt;&lt; 6) | ((0) &lt;&lt; 4) | ((3) &lt;&lt; 2) | (2))))<BR/>a = ((__m128i)__builtin_ia32_pshufd((__v4si)(__m128i)(a), (int)((((1) &lt;&lt; 6) | ((0) &lt;&lt; 4) | ((3) &lt;&lt; 2) | (2)))))<BR/>_mm_cvtepi32_pd(a)<BR/>mul = _mm_cvtepi32_pd(a)<BR/>_mm_load_pd(pv)<BR/>src = _mm_load_pd(pv)<BR/>pv += 2<BR/>_mm_div_pd(src, mul)<BR/>res = _mm_div_pd(src, mul)<BR/>_mm_add_pd(mysum, res)<BR/>mysum = _mm_add_pd(mysum, res)<BR/>>, shape=box]
+    "mult_Atv5_copy1"->"mult_Atv4_copy1"
+    "mult_Atv4_copy1"[label=< <B>mult_Atv4_copy1</B><BR/>j += 4<BR/>>, shape=box]
+    "mult_Atv4_copy1"->"mult_Atv6_copy1"
+    "mult_Atv3_copy1"[label=< <B>mult_Atv3_copy1</B><BR/>out[i] = ((double *)&amp;mysum)[0] + ((double *)&amp;mysum)[1]<BR/>>, shape=box]
+    "mult_Atv3_copy1"->"mult_Atv2_copy1"
+    "mult_Atv2_copy1"[label=< <B>mult_Atv2_copy1</B><BR/>i++<BR/>>, shape=box]
+    "mult_Atv2_copy1"->"mult_Atv8_copy1"
+    "mult_Atv1_copy1"[label=< <B>mult_Atv1_copy1</B><BR/>out[n] = out[n + 1] = out[n + 2] = 0.<BR/>>, shape=box]
+    "mult_Atv1_copy1"->"main2"
+    "dot5_copy1"[label=< <B>dot5_copy1</B><BR/>int i;<BR/>double sum = 0;<BR/>i = 0<BR/>>, shape=box]
+    "dot5_copy1"->"dot4_copy1"
+    "dot4_copy1"[label=< <B>dot4_copy1</B><BR/>>, shape=box]
+    "dot4_copy1"->"dot3_copy1"[label="i &lt; n"]
+    "dot4_copy1"->"dot1_copy1"[label="!(i &lt; n)"]
+    "dot3_copy1"[label=< <B>dot3_copy1</B><BR/>sum += *v++ * *u++<BR/>>, shape=box]
+    "dot3_copy1"->"dot2_copy1"
+    "dot2_copy1"[label=< <B>dot2_copy1</B><BR/>i++<BR/>>, shape=box]
+    "dot2_copy1"->"dot4_copy1"
+    "dot1_copy1"[label=< <B>dot1_copy1</B><BR/>sum (ImplicitCastExpr, LValueToRValue, double)<BR/>return sum;<BR/>>, shape=box]
+    "dot1_copy1"->"main1_e_e"
+}
