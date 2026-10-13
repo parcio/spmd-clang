@@ -1,0 +1,536 @@
+{
+  "states": [
+    {
+      "id": "0",
+      "marking": {
+        "End": [],
+        "MessageBuffer": [],
+        "P0": [],
+        "P1": [],
+        "Signals": [],
+        "Start": ["InitMarker()"]
+      },
+      "firedTransitions": [
+      ]
+    },
+    {
+      "id": "1",
+      "marking": {
+        "End": [],
+        "MessageBuffer": [],
+        "P0": [],
+        "P1": ["SsendMarker(1, 2, 0, 1140850688)"],
+        "Signals": ["ContinueMarker(0, 1, 0, 1140850688)"],
+        "Start": []
+      },
+      "firedTransitions": [
+        "MPI_Init0",
+        "MPI_Recv5",
+        "MPI_Ssend1"
+      ]
+    },
+    {
+      "id": "2",
+      "marking": {
+        "End": [],
+        "MessageBuffer": [],
+        "P0": ["FinalizeMarker()"],
+        "P1": [],
+        "Signals": ["ContinueMarker(1, 2, 0, 1140850688)"],
+        "Start": []
+      },
+      "firedTransitions": [
+        "Blocking2",
+        "Blocking9",
+        "MPI_Init0",
+        "MPI_Recv10",
+        "MPI_Recv3",
+        "MPI_Recv5",
+        "MPI_Ssend1",
+        "MPI_Ssend6",
+        "MPI_Ssend8"
+      ]
+    },
+    {
+      "id": "3",
+      "marking": {
+        "End": [],
+        "MessageBuffer": [],
+        "P0": ["FinalizeMarker()"],
+        "P1": ["FinalizeMarker()"],
+        "Signals": [],
+        "Start": []
+      },
+      "firedTransitions": [
+        "Blocking2",
+        "Blocking7",
+        "Blocking9",
+        "MPI_Init0",
+        "MPI_Recv10",
+        "MPI_Recv3",
+        "MPI_Recv5",
+        "MPI_Ssend1",
+        "MPI_Ssend6",
+        "MPI_Ssend8"
+      ]
+    },
+    {
+      "id": "4",
+      "marking": {
+        "End": [],
+        "MessageBuffer": [],
+        "P0": ["FinalizeMarker()"],
+        "P1": ["SsendMarker(1, 2, 0, 1140850688)"],
+        "Signals": ["ContinueMarker(2, 0, 0, 1140850688)"],
+        "Start": []
+      },
+      "firedTransitions": [
+        "Blocking2",
+        "MPI_Init0",
+        "MPI_Recv3",
+        "MPI_Recv5",
+        "MPI_Ssend1",
+        "MPI_Ssend8"
+      ]
+    },
+    {
+      "id": "5",
+      "marking": {
+        "End": [],
+        "MessageBuffer": [],
+        "P0": ["FinalizeMarker()"],
+        "P1": ["SsendMarker(1, 2, 0, 1140850688)"],
+        "Signals": [],
+        "Start": []
+      },
+      "firedTransitions": [
+        "Blocking2",
+        "Blocking9",
+        "MPI_Init0",
+        "MPI_Recv3",
+        "MPI_Recv5",
+        "MPI_Ssend1",
+        "MPI_Ssend8"
+      ]
+    },
+    {
+      "id": "6",
+      "marking": {
+        "End": [],
+        "MessageBuffer": [],
+        "P0": ["RecvMarker(2, 0, 0, 1140850688)"],
+        "P1": ["SsendMarker(1, 2, 0, 1140850688)"],
+        "Signals": [],
+        "Start": []
+      },
+      "firedTransitions": [
+        "Blocking2",
+        "MPI_Init0",
+        "MPI_Recv5",
+        "MPI_Ssend1"
+      ]
+    },
+    {
+      "id": "7",
+      "marking": {
+        "End": [],
+        "MessageBuffer": [],
+        "P0": ["SsendMarker(0, 1, 0, 1140850688)"],
+        "P1": ["RecvMarker(0, 1, 0, 1140850688)"],
+        "Signals": [],
+        "Start": []
+      },
+      "firedTransitions": [
+        "MPI_Init0"
+      ]
+    },
+    {
+      "id": "8",
+      "marking": {
+        "End": [],
+        "MessageBuffer": ["MessageMarker(0, 1, 0, 1140850688)"],
+        "P0": [],
+        "P1": ["RecvMarker(0, 1, 0, 1140850688)"],
+        "Signals": [],
+        "Start": []
+      },
+      "firedTransitions": [
+        "MPI_Init0",
+        "MPI_Ssend1"
+      ]
+    },
+    {
+      "id": "9",
+      "marking": {
+        "End": [],
+        "MessageBuffer": ["MessageMarker(0, 1, 0, 1140850688)", "MessageMarker(2, 0, 0, 1140850688)"],
+        "P0": [],
+        "P1": ["RecvMarker(0, 1, 0, 1140850688)"],
+        "Signals": [],
+        "Start": []
+      },
+      "firedTransitions": [
+        "MPI_Init0",
+        "MPI_Ssend1",
+        "MPI_Ssend8"
+      ]
+    },
+    {
+      "id": "10",
+      "marking": {
+        "End": [],
+        "MessageBuffer": ["MessageMarker(1, 2, 0, 1140850688)"],
+        "P0": [],
+        "P1": [],
+        "Signals": ["ContinueMarker(0, 1, 0, 1140850688)"],
+        "Start": []
+      },
+      "firedTransitions": [
+        "MPI_Init0",
+        "MPI_Recv5",
+        "MPI_Ssend1",
+        "MPI_Ssend6"
+      ]
+    },
+    {
+      "id": "11",
+      "marking": {
+        "End": [],
+        "MessageBuffer": ["MessageMarker(1, 2, 0, 1140850688)"],
+        "P0": ["FinalizeMarker()"],
+        "P1": [],
+        "Signals": ["ContinueMarker(2, 0, 0, 1140850688)"],
+        "Start": []
+      },
+      "firedTransitions": [
+        "Blocking2",
+        "MPI_Init0",
+        "MPI_Recv3",
+        "MPI_Recv5",
+        "MPI_Ssend1",
+        "MPI_Ssend6",
+        "MPI_Ssend8"
+      ]
+    },
+    {
+      "id": "12",
+      "marking": {
+        "End": [],
+        "MessageBuffer": ["MessageMarker(1, 2, 0, 1140850688)"],
+        "P0": ["FinalizeMarker()"],
+        "P1": [],
+        "Signals": [],
+        "Start": []
+      },
+      "firedTransitions": [
+        "Blocking2",
+        "Blocking9",
+        "MPI_Init0",
+        "MPI_Recv3",
+        "MPI_Recv5",
+        "MPI_Ssend1",
+        "MPI_Ssend6",
+        "MPI_Ssend8"
+      ]
+    },
+    {
+      "id": "13",
+      "marking": {
+        "End": [],
+        "MessageBuffer": ["MessageMarker(1, 2, 0, 1140850688)"],
+        "P0": ["RecvMarker(2, 0, 0, 1140850688)"],
+        "P1": [],
+        "Signals": [],
+        "Start": []
+      },
+      "firedTransitions": [
+        "Blocking2",
+        "MPI_Init0",
+        "MPI_Recv5",
+        "MPI_Ssend1",
+        "MPI_Ssend6"
+      ]
+    },
+    {
+      "id": "14",
+      "marking": {
+        "End": [],
+        "MessageBuffer": ["MessageMarker(1, 2, 0, 1140850688)", "MessageMarker(2, 0, 0, 1140850688)"],
+        "P0": [],
+        "P1": [],
+        "Signals": ["ContinueMarker(0, 1, 0, 1140850688)"],
+        "Start": []
+      },
+      "firedTransitions": [
+        "MPI_Init0",
+        "MPI_Recv5",
+        "MPI_Ssend1",
+        "MPI_Ssend6",
+        "MPI_Ssend8"
+      ]
+    },
+    {
+      "id": "15",
+      "marking": {
+        "End": [],
+        "MessageBuffer": ["MessageMarker(1, 2, 0, 1140850688)", "MessageMarker(2, 0, 0, 1140850688)"],
+        "P0": ["RecvMarker(2, 0, 0, 1140850688)"],
+        "P1": [],
+        "Signals": [],
+        "Start": []
+      },
+      "firedTransitions": [
+        "Blocking2",
+        "MPI_Init0",
+        "MPI_Recv5",
+        "MPI_Ssend1",
+        "MPI_Ssend6",
+        "MPI_Ssend8"
+      ]
+    },
+    {
+      "id": "16",
+      "marking": {
+        "End": [],
+        "MessageBuffer": ["MessageMarker(2, 0, 0, 1140850688)"],
+        "P0": [],
+        "P1": ["SsendMarker(1, 2, 0, 1140850688)"],
+        "Signals": ["ContinueMarker(0, 1, 0, 1140850688)"],
+        "Start": []
+      },
+      "firedTransitions": [
+        "MPI_Init0",
+        "MPI_Recv5",
+        "MPI_Ssend1",
+        "MPI_Ssend8"
+      ]
+    },
+    {
+      "id": "17",
+      "marking": {
+        "End": [],
+        "MessageBuffer": ["MessageMarker(2, 0, 0, 1140850688)"],
+        "P0": ["RecvMarker(2, 0, 0, 1140850688)"],
+        "P1": ["SsendMarker(1, 2, 0, 1140850688)"],
+        "Signals": [],
+        "Start": []
+      },
+      "firedTransitions": [
+        "Blocking2",
+        "MPI_Init0",
+        "MPI_Recv5",
+        "MPI_Ssend1",
+        "MPI_Ssend8"
+      ]
+    },
+    {
+      "id": "18",
+      "marking": {
+        "End": [],
+        "MessageBuffer": ["MessageMarker(2, 0, 0, 1140850688)"],
+        "P0": ["SsendMarker(0, 1, 0, 1140850688)"],
+        "P1": ["RecvMarker(0, 1, 0, 1140850688)"],
+        "Signals": [],
+        "Start": []
+      },
+      "firedTransitions": [
+        "MPI_Init0",
+        "MPI_Ssend8"
+      ]
+    },
+    {
+      "id": "19",
+      "marking": {
+        "End": ["FinalizeMarker()"],
+        "MessageBuffer": [],
+        "P0": [],
+        "P1": [],
+        "Signals": [],
+        "Start": []
+      },
+      "firedTransitions": [
+        "Blocking2",
+        "Blocking7",
+        "Blocking9",
+        "MPI_Finalize4",
+        "MPI_Init0",
+        "MPI_Recv10",
+        "MPI_Recv3",
+        "MPI_Recv5",
+        "MPI_Ssend1",
+        "MPI_Ssend6",
+        "MPI_Ssend8"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "0-7",
+      "source": "0",
+      "target": "7",
+      "label": "MPI_Init0"
+    },
+    {
+      "id": "1-6",
+      "source": "1",
+      "target": "6",
+      "label": "Blocking2"
+    },
+    {
+      "id": "1-10",
+      "source": "1",
+      "target": "10",
+      "label": "MPI_Ssend6"
+    },
+    {
+      "id": "1-16",
+      "source": "1",
+      "target": "16",
+      "label": "MPI_Ssend8"
+    },
+    {
+      "id": "2-3",
+      "source": "2",
+      "target": "3",
+      "label": "Blocking7"
+    },
+    {
+      "id": "3-19",
+      "source": "3",
+      "target": "19",
+      "label": "MPI_Finalize4"
+    },
+    {
+      "id": "4-5",
+      "source": "4",
+      "target": "5",
+      "label": "Blocking9"
+    },
+    {
+      "id": "4-11",
+      "source": "4",
+      "target": "11",
+      "label": "MPI_Ssend6"
+    },
+    {
+      "id": "5-12",
+      "source": "5",
+      "target": "12",
+      "label": "MPI_Ssend6"
+    },
+    {
+      "id": "6-13",
+      "source": "6",
+      "target": "13",
+      "label": "MPI_Ssend6"
+    },
+    {
+      "id": "6-17",
+      "source": "6",
+      "target": "17",
+      "label": "MPI_Ssend8"
+    },
+    {
+      "id": "7-8",
+      "source": "7",
+      "target": "8",
+      "label": "MPI_Ssend1"
+    },
+    {
+      "id": "7-18",
+      "source": "7",
+      "target": "18",
+      "label": "MPI_Ssend8"
+    },
+    {
+      "id": "8-1",
+      "source": "8",
+      "target": "1",
+      "label": "MPI_Recv5"
+    },
+    {
+      "id": "8-9",
+      "source": "8",
+      "target": "9",
+      "label": "MPI_Ssend8"
+    },
+    {
+      "id": "9-16",
+      "source": "9",
+      "target": "16",
+      "label": "MPI_Recv5"
+    },
+    {
+      "id": "10-13",
+      "source": "10",
+      "target": "13",
+      "label": "Blocking2"
+    },
+    {
+      "id": "10-14",
+      "source": "10",
+      "target": "14",
+      "label": "MPI_Ssend8"
+    },
+    {
+      "id": "11-12",
+      "source": "11",
+      "target": "12",
+      "label": "Blocking9"
+    },
+    {
+      "id": "12-2",
+      "source": "12",
+      "target": "2",
+      "label": "MPI_Recv10"
+    },
+    {
+      "id": "13-15",
+      "source": "13",
+      "target": "15",
+      "label": "MPI_Ssend8"
+    },
+    {
+      "id": "14-15",
+      "source": "14",
+      "target": "15",
+      "label": "Blocking2"
+    },
+    {
+      "id": "15-11",
+      "source": "15",
+      "target": "11",
+      "label": "MPI_Recv3"
+    },
+    {
+      "id": "16-14",
+      "source": "16",
+      "target": "14",
+      "label": "MPI_Ssend6"
+    },
+    {
+      "id": "16-17",
+      "source": "16",
+      "target": "17",
+      "label": "Blocking2"
+    },
+    {
+      "id": "17-4",
+      "source": "17",
+      "target": "4",
+      "label": "MPI_Recv3"
+    },
+    {
+      "id": "17-15",
+      "source": "17",
+      "target": "15",
+      "label": "MPI_Ssend6"
+    },
+    {
+      "id": "18-9",
+      "source": "18",
+      "target": "9",
+      "label": "MPI_Ssend1"
+    }
+  ]
+}

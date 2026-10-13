@@ -1,0 +1,396 @@
+{
+  "nodes": [
+    {
+      "id": "Start",
+      "type": "petriPlace",
+      "position": { "x": 100, "y": 100 },
+      "data": {
+        "type": "place",
+        "id": "Start",
+        "label": "Start",
+        "htmlLabel": "<B>Start<\/B><BR\/>"
+      }
+    },
+    {
+      "id": "End",
+      "type": "petriPlace",
+      "position": { "x": 350, "y": 100 },
+      "data": {
+        "type": "place",
+        "id": "End",
+        "label": "End",
+        "htmlLabel": "<B>End<\/B><BR\/>"
+      }
+    },
+    {
+      "id": "MessageBuffer",
+      "type": "petriPlace",
+      "position": { "x": 100, "y": 220 },
+      "data": {
+        "type": "place",
+        "id": "MessageBuffer",
+        "label": "MessageBuffer",
+        "htmlLabel": "<B>MessageBuffer<\/B><BR\/>"
+      }
+    },
+    {
+      "id": "Signals",
+      "type": "petriPlace",
+      "position": { "x": 350, "y": 220 },
+      "data": {
+        "type": "place",
+        "id": "Signals",
+        "label": "Signals",
+        "htmlLabel": "<B>Signals<\/B><BR\/>"
+      }
+    },
+    {
+      "id": "P2",
+      "type": "petriPlace",
+      "position": { "x": 100, "y": 340 },
+      "data": {
+        "type": "place",
+        "id": "P2",
+        "label": "P2",
+        "htmlLabel": "<B>P2<\/B><BR\/>"
+      }
+    },
+    {
+      "id": "P1",
+      "type": "petriPlace",
+      "position": { "x": 350, "y": 340 },
+      "data": {
+        "type": "place",
+        "id": "P1",
+        "label": "P1",
+        "htmlLabel": "<B>P1<\/B><BR\/>"
+      }
+    },
+    {
+      "id": "P0",
+      "type": "petriPlace",
+      "position": { "x": 100, "y": 460 },
+      "data": {
+        "type": "place",
+        "id": "P0",
+        "label": "P0",
+        "htmlLabel": "<B>P0<\/B><BR\/>"
+      }
+    },
+    {
+      "id": "MPI_Init0",
+      "type": "petriTransition",
+      "position": { "x": 350, "y": 150 },
+      "data": {
+        "type": "transition",
+        "id": "MPI_Init0",
+        "label": "MPI_Init0",
+        "htmlLabel": "<B>MPI_Init0<\/B><BR\/>"
+      }
+    },
+    {
+      "id": "MPI_Ssend1",
+      "type": "petriTransition",
+      "position": { "x": 600, "y": 150 },
+      "data": {
+        "type": "transition",
+        "id": "MPI_Ssend1",
+        "label": "MPI_Ssend1",
+        "htmlLabel": "<B>MPI_Ssend1<\/B><BR\/>type(s) == SsendMarker and s.matches(0, 1, 0, 1140850688)<BR\/>"
+      }
+    },
+    {
+      "id": "Blocking2",
+      "type": "petriTransition",
+      "position": { "x": 350, "y": 270 },
+      "data": {
+        "type": "transition",
+        "id": "Blocking2",
+        "label": "Blocking2",
+        "htmlLabel": "<B>Blocking2<\/B><BR\/>type(c) == ContinueMarker and c.matches(0, 1, 0, 1140850688)<BR\/>"
+      }
+    },
+    {
+      "id": "MPI_Recv3",
+      "type": "petriTransition",
+      "position": { "x": 600, "y": 270 },
+      "data": {
+        "type": "transition",
+        "id": "MPI_Recv3",
+        "label": "MPI_Recv3",
+        "htmlLabel": "<B>MPI_Recv3<\/B><BR\/>type(r) == RecvMarker and r.matches(2, 0, 0, 1140850688) and type(s) == MessageMarker and s.matches(2, 0, 0, 1140850688)<BR\/>"
+      }
+    },
+    {
+      "id": "MPI_Finalize4",
+      "type": "petriTransition",
+      "position": { "x": 350, "y": 390 },
+      "data": {
+        "type": "transition",
+        "id": "MPI_Finalize4",
+        "label": "MPI_Finalize4",
+        "htmlLabel": "<B>MPI_Finalize4<\/B><BR\/>type(f1) == FinalizeMarker and f1.matches() and type(f2) == FinalizeMarker and f2.matches() and type(f0) == FinalizeMarker and f0.matches()<BR\/>"
+      }
+    },
+    {
+      "id": "MPI_Recv5",
+      "type": "petriTransition",
+      "position": { "x": 600, "y": 390 },
+      "data": {
+        "type": "transition",
+        "id": "MPI_Recv5",
+        "label": "MPI_Recv5",
+        "htmlLabel": "<B>MPI_Recv5<\/B><BR\/>type(r) == RecvMarker and r.matches(0, 1, 0, 1140850688) and type(s) == MessageMarker and s.matches(0, 1, 0, 1140850688)<BR\/>"
+      }
+    },
+    {
+      "id": "MPI_Ssend6",
+      "type": "petriTransition",
+      "position": { "x": 350, "y": 510 },
+      "data": {
+        "type": "transition",
+        "id": "MPI_Ssend6",
+        "label": "MPI_Ssend6",
+        "htmlLabel": "<B>MPI_Ssend6<\/B><BR\/>type(s) == SsendMarker and s.matches(1, 2, 0, 1140850688)<BR\/>"
+      }
+    },
+    {
+      "id": "Blocking7",
+      "type": "petriTransition",
+      "position": { "x": 600, "y": 510 },
+      "data": {
+        "type": "transition",
+        "id": "Blocking7",
+        "label": "Blocking7",
+        "htmlLabel": "<B>Blocking7<\/B><BR\/>type(c) == ContinueMarker and c.matches(1, 2, 0, 1140850688)<BR\/>"
+      }
+    },
+    {
+      "id": "MPI_Ssend8",
+      "type": "petriTransition",
+      "position": { "x": 350, "y": 630 },
+      "data": {
+        "type": "transition",
+        "id": "MPI_Ssend8",
+        "label": "MPI_Ssend8",
+        "htmlLabel": "<B>MPI_Ssend8<\/B><BR\/>type(s) == SsendMarker and s.matches(2, 0, 0, 1140850688)<BR\/>"
+      }
+    },
+    {
+      "id": "Blocking9",
+      "type": "petriTransition",
+      "position": { "x": 600, "y": 630 },
+      "data": {
+        "type": "transition",
+        "id": "Blocking9",
+        "label": "Blocking9",
+        "htmlLabel": "<B>Blocking9<\/B><BR\/>type(c) == ContinueMarker and c.matches(2, 0, 0, 1140850688)<BR\/>"
+      }
+    },
+    {
+      "id": "MPI_Recv10",
+      "type": "petriTransition",
+      "position": { "x": 350, "y": 750 },
+      "data": {
+        "type": "transition",
+        "id": "MPI_Recv10",
+        "label": "MPI_Recv10",
+        "htmlLabel": "<B>MPI_Recv10<\/B><BR\/>type(r) == RecvMarker and r.matches(1, 2, 0, 1140850688) and type(s) == MessageMarker and s.matches(1, 2, 0, 1140850688)<BR\/>"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "Start-MPI_Init0",
+      "source": "Start",
+      "target": "MPI_Init0",
+      "label": "i"
+    },
+    {
+      "id": "MPI_Init0-P0",
+      "source": "MPI_Init0",
+      "target": "P0",
+      "label": "SsendMarker(0, 1, 0, 1140850688)"
+    },
+    {
+      "id": "MPI_Init0-P1",
+      "source": "MPI_Init0",
+      "target": "P1",
+      "label": "RecvMarker(0, 1, 0, 1140850688)"
+    },
+    {
+      "id": "MPI_Init0-P2",
+      "source": "MPI_Init0",
+      "target": "P2",
+      "label": "SsendMarker(2, 0, 0, 1140850688)"
+    },
+    {
+      "id": "P0-MPI_Ssend1",
+      "source": "P0",
+      "target": "MPI_Ssend1",
+      "label": "s"
+    },
+    {
+      "id": "MPI_Ssend1-MessageBuffer",
+      "source": "MPI_Ssend1",
+      "target": "MessageBuffer",
+      "label": "MessageMarker(0, 1, 0, 1140850688)"
+    },
+    {
+      "id": "Signals-Blocking2",
+      "source": "Signals",
+      "target": "Blocking2",
+      "label": "c"
+    },
+    {
+      "id": "Blocking2-P0",
+      "source": "Blocking2",
+      "target": "P0",
+      "label": "RecvMarker(2, 0, 0, 1140850688)"
+    },
+    {
+      "id": "P0-MPI_Recv3",
+      "source": "P0",
+      "target": "MPI_Recv3",
+      "label": "r"
+    },
+    {
+      "id": "MessageBuffer-MPI_Recv3",
+      "source": "MessageBuffer",
+      "target": "MPI_Recv3",
+      "label": "s"
+    },
+    {
+      "id": "MPI_Recv3-Signals",
+      "source": "MPI_Recv3",
+      "target": "Signals",
+      "label": "ContinueMarker(2, 0, 0, 1140850688) or EmptyMarker() or RequestMarker()"
+    },
+    {
+      "id": "MPI_Recv3-P0",
+      "source": "MPI_Recv3",
+      "target": "P0",
+      "label": "FinalizeMarker()"
+    },
+    {
+      "id": "P0-MPI_Finalize4",
+      "source": "P0",
+      "target": "MPI_Finalize4",
+      "label": "f0"
+    },
+    {
+      "id": "P1-MPI_Finalize4",
+      "source": "P1",
+      "target": "MPI_Finalize4",
+      "label": "f1"
+    },
+    {
+      "id": "P2-MPI_Finalize4",
+      "source": "P2",
+      "target": "MPI_Finalize4",
+      "label": "f2"
+    },
+    {
+      "id": "MPI_Finalize4-End",
+      "source": "MPI_Finalize4",
+      "target": "End",
+      "label": "FinalizeMarker()"
+    },
+    {
+      "id": "P1-MPI_Recv5",
+      "source": "P1",
+      "target": "MPI_Recv5",
+      "label": "r"
+    },
+    {
+      "id": "MessageBuffer-MPI_Recv5",
+      "source": "MessageBuffer",
+      "target": "MPI_Recv5",
+      "label": "s"
+    },
+    {
+      "id": "MPI_Recv5-Signals",
+      "source": "MPI_Recv5",
+      "target": "Signals",
+      "label": "ContinueMarker(0, 1, 0, 1140850688) or EmptyMarker() or RequestMarker()"
+    },
+    {
+      "id": "MPI_Recv5-P1",
+      "source": "MPI_Recv5",
+      "target": "P1",
+      "label": "SsendMarker(1, 2, 0, 1140850688)"
+    },
+    {
+      "id": "P1-MPI_Ssend6",
+      "source": "P1",
+      "target": "MPI_Ssend6",
+      "label": "s"
+    },
+    {
+      "id": "MPI_Ssend6-MessageBuffer",
+      "source": "MPI_Ssend6",
+      "target": "MessageBuffer",
+      "label": "MessageMarker(1, 2, 0, 1140850688)"
+    },
+    {
+      "id": "Signals-Blocking7",
+      "source": "Signals",
+      "target": "Blocking7",
+      "label": "c"
+    },
+    {
+      "id": "Blocking7-P1",
+      "source": "Blocking7",
+      "target": "P1",
+      "label": "FinalizeMarker()"
+    },
+    {
+      "id": "P2-MPI_Ssend8",
+      "source": "P2",
+      "target": "MPI_Ssend8",
+      "label": "s"
+    },
+    {
+      "id": "MPI_Ssend8-MessageBuffer",
+      "source": "MPI_Ssend8",
+      "target": "MessageBuffer",
+      "label": "MessageMarker(2, 0, 0, 1140850688)"
+    },
+    {
+      "id": "Signals-Blocking9",
+      "source": "Signals",
+      "target": "Blocking9",
+      "label": "c"
+    },
+    {
+      "id": "Blocking9-P2",
+      "source": "Blocking9",
+      "target": "P2",
+      "label": "RecvMarker(1, 2, 0, 1140850688)"
+    },
+    {
+      "id": "P2-MPI_Recv10",
+      "source": "P2",
+      "target": "MPI_Recv10",
+      "label": "r"
+    },
+    {
+      "id": "MessageBuffer-MPI_Recv10",
+      "source": "MessageBuffer",
+      "target": "MPI_Recv10",
+      "label": "s"
+    },
+    {
+      "id": "MPI_Recv10-Signals",
+      "source": "MPI_Recv10",
+      "target": "Signals",
+      "label": "ContinueMarker(1, 2, 0, 1140850688) or EmptyMarker() or RequestMarker()"
+    },
+    {
+      "id": "MPI_Recv10-P2",
+      "source": "MPI_Recv10",
+      "target": "P2",
+      "label": "FinalizeMarker()"
+    }
+  ]
+}

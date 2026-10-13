@@ -103,6 +103,10 @@ void CPNStateGraph::compute(const CPNMarking &initial_marking)
             _dead_transitions.insert(transition.name());
         }
     }
+
+    // TODO WIP cpn-vis
+    output_reactflow("net_reactflow.json");
+
 }
 
 void CPNStateGraph::display_statistics() const
